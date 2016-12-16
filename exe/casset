@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'commander/import'
+require 'casset'
+
+program :name, 'casset'
+program :version, Casset::VERSION
+program :description, 'casset generates assets for iOS/Android app.'
+
+command :install do |c|
+  c.syntax = 'casset install [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    Casset::Dsl.load
+  end
+end
+
+default_command :install
