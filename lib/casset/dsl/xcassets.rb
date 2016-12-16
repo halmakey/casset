@@ -1,6 +1,6 @@
 require_relative '../dsl'
 require 'json'
-require 'combine_pdf'
+require 'cocoa'
 
 module Casset
   class Dsl
@@ -68,11 +68,17 @@ module Casset
       infile = infile.sub /:\d+?$/, ''
       outfile = File.join(@dirname, outfile)
 
-      inpdf = CombinePDF.load(infile, allow_optional_content: true)
-      outpdf = CombinePDF.new
-      outpdf << inpdf.pages[page.to_i]
-      outpdf.save outfile
+      inpdf = Poppler::Document.new(infile)
+      outpage = inpdf[page.to_i]
+      surface = Cairo::PDFSurface.new(outfile, page.size[0], page.size[1])
+      context = Cairo::Context.new(surface)
+      outpage.render(context)
+      # inpdf = CombinePDF.load(infile, allow_optional_content: true)
+      # outpdf = CombinePDF.new
+      # outpdf << inpdf.pages[page.to_i]
+      # outpdf.save outfile
       puts outfile
+
     end
   end
 end

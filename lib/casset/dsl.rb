@@ -1,5 +1,3 @@
-require_relative 'dsl/xcassets'
-
 module Casset
   class Dsl
     def self.load(filename = 'Cassetfile')
@@ -25,3 +23,5 @@ module Casset
     end
   end
 end
+
+require_relative 'dsl/xcassets'

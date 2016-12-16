@@ -1,0 +1,11 @@
+dir 'output' do
+  dir 'hoge' do
+    dir 'huga' do
+      info
+    end
+    dir 'piyo'
+  end
+  xcassets 'dobon' do
+    compat 'button_misc_picture', 'button_misc_picture.pdf:0', 'button_misc_picture.pdf:1'
+  end
+end
